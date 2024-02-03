@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f8f8;
+      }
+
+      #container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      #yesButton {
+        height: 50px;
+        width: 100px;
+        font-size: 16px;
+        background-color: #4caf50; /* Green color for Yes button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px; /* Add margin to separate the buttons */
+      }
+
+      #noButton {
+        font-size: 16px;
+        background-color: #ff5733; /* Red color for No button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 10px; /* Add margin to separate the buttons */
+      }
+
+      #container_2 {
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+
+    <script>
+     function showBearKiss() {
+    const container = document.getElementById("container");
+
+    // Create a new img element for the downloaded bear kiss GIF
+    const bearKissImg = document.createElement("img");
+    bearKissImg.src = "bear-kiss-bear-kisses.gif";
+    bearKissImg.alt = "Bear Kiss GIF";
+    bearKissImg.style.width = "100%"; // Adjust width if needed
+
+    // Append the bear kiss img to the container
+    container.innerHTML = ""; // Clear existing content
+    container.appendChild(bearKissImg);
+
+    // Add a happy message
+    const happyMessage = document.createElement("h1");
+    happyMessage.textContent = "Yay! I'm so happy you said yes!💖";
+    container.appendChild(happyMessage);
+
+    // Make the POST API call to http://localhost:3000/sendEmail
+    fetch('http://localhost:3000/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: 'Yes! They said yes to being a valentine!' }),
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  }
+      function changeNoText() {
+        const noButton = document.getElementById("noButton");
+        const yesButton = document.getElementById("yesButton");
+        const noTexts = [
+          "Are you sure?🥺",
+          "Really sure?🥺",
+          "Think again!",
+          "last chance🥺",
+          "you might regret this!",
+          "give it another thought🥺",
+          "are you absolutely certain",
+          "This could be a mistake",
+          "Have a heart🥺",
+          "Don't be so cold",
+          "change of heart?",
+          "why wouldnt you reconsider?",
+          "is that your final answer?",
+          "You are breaking my heart :(",
+        ];
+        const randomIndex = Math.floor(Math.random() * noTexts.length);
+        noButton.innerHTML = noTexts[randomIndex];
+
+        yesButton.style.height =
+          parseFloat(window.getComputedStyle(yesButton).height) + 7 + "px";
+        yesButton.style.width =
+          parseFloat(window.getComputedStyle(yesButton).width) + 20 + "px";
+      }
+    </script>
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <div id="container">
+      <dotlottie-player
+        src="https://lottie.host/0b6a3fb4-a046-48a8-8a2e-d7aada8bfb0d/FUbC4DGCo7.json"
+        background="transparent"
+        speed="1"
+        style="width: 300px; height: 300px"
+        loop
+        autoplay
+      ></dotlottie-player>
+      <h1>Will you be my valentine?</h1>
+      <div id="container_2">
+        <button id="yesButton" onclick="showBearKiss()">Yes</button>
+        <button id="noButton" onclick="changeNoText()">No</button>
+      </div>
+    </div>
+  </body>
+</html>
