@@ -4,15 +4,15 @@
     "description": "A project for Valentine's Day",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "^4.17.1",
-      "nodemailer": "6.9.9"
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "nodemailer": "6.9.9"
     },
     "engines": {
-      "node": ">=14.0.0"
+        "node": ">=14.0.0"
     },
     "license": "MIT"
-  }
-  
+}
